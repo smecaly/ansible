@@ -1,0 +1,21 @@
+---
+# tasks file for Winzip
+
+- name: Install WinZip
+  win_package:
+    path: https://download.winzip.com/winzip250-64.msi
+    product_id : {CD95F661-A5C4-44F5-A6AA-ECDD91C2412F}
+    state: present
+  tags:
+  - Install
+  - Repair
+
+
+- name: Install WinZip
+  win_package:
+    path: https://download.winzip.com/winzip250-64.msi
+    product_id : {CD95F661-A5C4-44F5-A6AA-ECDD91C2412F}
+    state: absent
+  tags:
+  - Uninstall
+

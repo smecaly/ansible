@@ -1,0 +1,22 @@
+---
+# tasks file for putty
+
+- name: Install Putty
+  win_package:
+    path: https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.76-installer.msi
+    product_id : {1E0D5689-40F1-4E46-ABBB-EAAC68B5CD89}
+    state: present
+  tags:
+  - Install
+  - Repair
+
+
+
+- name: Uninstall Putty
+  win_package:
+    path: https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.76-installer.msi
+    product_id : {1E0D5689-40F1-4E46-ABBB-EAAC68B5CD89}
+    state: absent  
+  tags:
+  - Uninstall
+

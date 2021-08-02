@@ -1,0 +1,9 @@
+
+---
+# ansible playbook
+
+- hosts: all
+  name: playbook for putty
+  roles: 
+     - putty
+     - winzip
