@@ -1,20 +1,25 @@
 ---
 # tasks file for Winzip
 
-- name: Install WinZip
-  win_package:
-    path: https://download.winzip.com/winzip250-64.msi
-    product_id : {CD95F661-A5C4-44F5-A6AA-ECDD91C2412F}
-    state: present
+- name: Download WinZip
+  win_get_url:
+    url: https://download.winzip.com/winzip250-64.msi
+    dest: C:\tmp\winzip.msi
   tags:
   - Install
   - Repair
 
-
 - name: Install WinZip
   win_package:
-    path: https://download.winzip.com/winzip250-64.msi
-    product_id : {CD95F661-A5C4-44F5-A6AA-ECDD91C2412F}
+    path: C:\tmp\winzip.msi
+    product_id: WinZip
+  tags:
+  - Install
+  - Repair
+
+- name: Uninstall WinZip
+  win_package:
+    path: C:\tmp\winzip.msi
     state: absent
   tags:
   - Uninstall
