@@ -1,25 +1,35 @@
 ---
 # tasks file for putty
 
-- name: Download putty
-  win_get_url:
-    url: https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.76-installer.msi
-    dest: C:\tmp\putty.msi
+- name: Copying Installation file from share location for Putty
+  win_copy:
+    src : '/home/ec2-user/files/putty-64bit-0.76-installer.msi'
+    dest: 'C:\tmp\putty.msi'
   tags:
   - Install
   - Repair
 
+
 - name: Install putty
   win_package:
-    path: C:\tmp\putty.msi
-    product_id: PuTTY
+    path: 'C:\tmp\putty.msi'
+    product_id: 'PuTTY'
+    state: present
   tags:
   - Install
   - Repair
 
 - name: Uninstall putty
   win_package:
-    path: C:\tmp\putty.msi
+    path: 'C:\tmp\putty.msi'
+    state: absent
+  tags:
+  - Uninstall
+
+
+- name: Cleaning up files copied from share location
+  win_file:
+    path: 'C:\tmp\putty.msi'
     state: absent
   tags:
   - Uninstall
