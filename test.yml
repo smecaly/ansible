@@ -3,7 +3,7 @@
 # ansible playbook
 
 - hosts: all
-  name: playbook for putty
+  name: playbook for windows tools
   roles: 
      - putty
 #     - winzip

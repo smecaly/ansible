@@ -1,26 +1,34 @@
 ---
 # tasks file for Winzip
 
-- name: Download WinZip
-  win_get_url:
-    url: https://download.winzip.com/winzip250-64.msi
-    dest: C:\tmp\winzip.msi
+- name: Copying Installation file from share location for WinZip
+  win_copy:
+    src : '/home/ec2-user/files/winzip250-64.msi'
+    dest: 'C:\tmp\winzip.msi'
   tags:
   - Install
   - Repair
 
+
 - name: Install WinZip
   win_package:
-    path: C:\tmp\winzip.msi
-    product_id: WinZip
+    path: 'C:\tmp\winzip.msi'
+    product_id: 'WinZip'
+    state: present
   tags:
   - Install
   - Repair
 
 - name: Uninstall WinZip
   win_package:
-    path: C:\tmp\winzip.msi
+    path: 'C:\tmp\winzip.msi'
     state: absent
   tags:
   - Uninstall
 
+- name: Cleaning up files copied from share location
+  win_file:
+    path: 'C:\tmp\winzip.msi'
+    state: absent
+  tags:
+  - Uninstall
