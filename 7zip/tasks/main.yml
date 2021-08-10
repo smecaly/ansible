@@ -1,0 +1,36 @@
+---
+# tasks file for 7zip
+
+- name: Copying Installation file from share location for Putty
+  win_copy:
+    src : '/home/ec2-user/files/7z1900-x64.msi'
+    dest: 'C:\tmp\7zip.msi'
+  tags:
+  - Install
+  - Repair
+
+
+- name: Install putty
+  win_package:
+    path: 'C:\tmp\7zip.msi'
+    product_id: '7Zip'
+    state: present
+  tags:
+  - Install
+  - Repair
+
+- name: Uninstall putty
+  win_package:
+    path: 'C:\tmp\7zip.msi'
+    state: absent
+  tags:
+  - Uninstall
+
+
+- name: Cleaning up files copied from share location
+  win_file:
+    path: 'C:\tmp\7zip.msi'
+    state: absent
+  tags:
+  - Uninstall
+
